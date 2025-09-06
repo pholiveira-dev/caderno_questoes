@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Reposição | UFAC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        :root {
+            --cor-principal: #007bff;
+            --cor-secundaria: #6c757d;
+            --fundo-claro: #f8f9fa;
+            --cinza-escuro: #343a40;
+            --borda-padrao: #ced4da;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--fundo-claro);
+            color: var(--cinza-escuro);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--sombra);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            color: var(--cor-principal);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--cor-secundaria);
+            font-size: 1rem;
+        }
+
+        .form-section {
+            border-bottom: 2px solid var(--borda-padrao);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--borda-padrao);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cor-principal);
+        }
+
+        .btn-submit {
+            grid-column: 1 / -1;
+            width: fit-content;
+            justify-self: flex-end;
+            background-color: var(--cor-principal);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .list-section h2 {
+            font-weight: 700;
+            color: var(--cor-principal);
+            margin-bottom: 1rem;
+        }
+
+        .lista-reposicoes {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .lista-reposicoes li {
+            background: var(--fundo-claro);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            border-left: 5px solid var(--cor-principal);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .lista-reposicoes li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .reposicao-info strong {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .reposicao-info span {
+            color: var(--cor-secundaria);
+        }
+
+        .estado {
+            text-align: center;
+            color: var(--cor-secundaria);
+            font-style: italic;
+        }
+
+        .nav-link {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .nav-link a {
+            color: var(--cor-principal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Solicitação de Reposição</h1>
+            <p>Preencha os dados abaixo para solicitar uma nova reposição de aula.</p>
+        </header>
+
+        <nav class="nav-link">
+            <a href="/">Voltar para o Cadastro de Alunos</a>
+        </nav>
+
+        <section class="form-section">
+            <form action="/reposicoes" method="POST" class="form-grid">
+                <div class="form-group">
+                    <label for="rgm">RGM do Aluno:</label>
+                    <input type="text" id="rgm" name="rgm" required>
+                </div>
+                <div class="form-group">
+                    <label for="motivo">Motivo:</label>
+                    <select id="motivo" name="motivo" required>
+                        <option value="">Selecione...</option>
+                        <option value="Atestado médico">Atestado médico</option>
+                        <option value="Escala de trabalho">Escala de trabalho</option>
+                        <option value="Matricula tardia">Matrícula tardia</option>
+                        <option value="Autorização do professor">Autorização do professor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="professor">Professor:</label>
+                    <select id="professor" name="professor" required>
+                        <option value="">Selecione...</option>
+                        <option value="Ariane">Ariane</option>
+                        <option value="Bárbara">Bárbara</option>
+                        <option value="Breno">Breno</option>
+                        <option value="Jade">Jade</option>
+                        <option value="Karillucy">Karillucy</option>
+                        <option value="Mariana">Mariana</option>
+                        <option value="Natália">Natália</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data_reposicao">Data da Reposição:</label>
+                    <input type="date" id="data_reposicao" name="data_reposicao" required>
+                </div>
+                <button type="submit" class="btn-submit">Solicitar Reposição</button>
+            </form>
+        </section>
+
+        <section class="list-section">
+            <h2>Solicitações de Reposição</h2>
+            <% if (typeof reposicoes !== 'undefined' && reposicoes.length > 0) { %>
+                <ul class="lista-reposicoes">
+                    <% reposicoes.forEach(function(reposicao) { %>
+                        <li>
+                            <p class="reposicao-info">
+                                <strong>RGM:</strong> <span><%= reposicao.rgm %></span>
+                            </p>
+                            <p class="reposicao-info">
+                                <strong>Motivo:</strong> <span><%= reposicao.motivo %></span>
+                            </p>
+                            <p class="reposicao-info">
+                                <strong>Professor:</strong> <span><%= reposicao.professor %></span>
+                            </p>
+                            <p class="reposicao-info">
+                                <strong>Data:</strong> <span><%= reposicao.data_reposicao %></span>
+                            </p>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else if (typeof reposicoes !== 'undefined' && reposicoes.length === 0) { %>
+                <p class="estado">Nenhuma solicitação de reposição cadastrada.</p>
+            <% } else { %>
+                <p class="estado">Carregando solicitações...</p>
+            <% } %>
+        </section>
+    </div>
+
+</body>
+</html>

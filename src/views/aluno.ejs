@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Alunos | UFAC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        :root {
+            --cor-principal: #007bff;
+            --cor-secundaria: #6c757d;
+            --fundo-claro: #f8f9fa;
+            --cinza-escuro: #343a40;
+            --borda-padrao: #ced4da;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--fundo-claro);
+            color: var(--cinza-escuro);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--sombra);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            color: var(--cor-principal);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--cor-secundaria);
+            font-size: 1rem;
+        }
+
+        .form-section {
+            border-bottom: 2px solid var(--borda-padrao);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--borda-padrao);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cor-principal);
+        }
+
+        .btn-submit {
+            grid-column: 1 / -1;
+            width: fit-content;
+            justify-self: flex-end;
+            background-color: var(--cor-principal);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .list-section h2 {
+            font-weight: 700;
+            color: var(--cor-principal);
+            margin-bottom: 1rem;
+        }
+
+        .lista-alunos {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .lista-alunos li {
+            background: var(--fundo-claro);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            border-left: 5px solid var(--cor-principal);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .lista-alunos li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .aluno-info strong {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .aluno-info span {
+            color: var(--cor-secundaria);
+        }
+        
+        /* Mensagem de estado */
+        .estado {
+            text-align: center;
+            color: var(--cor-secundaria);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Cadastro de Aluno</h1>
+            <p>Preencha o formulário para adicionar um novo aluno à base de dados.</p>
+        </header>
+
+        <nav class="nav-link">
+         <a href="/reposicoes">Ir para Solicitação de Reposição</a>
+        </nav>
+
+        <section class="form-section">
+            <form action="/alunos" method="POST" class="form-grid">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="rgm">RGM:</label>
+                    <input type="text" id="rgm" name="rgm" required>
+                </div>
+                <div class="form-group">
+                    <label for="semestre">Semestre:</label>
+                    <select id="semestre" name="semestre" required>
+                        <option value="7º">7º</option>
+                        <option value="8º">8º</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="turno">Turno:</label>
+                    <select id="turno" name="turno">
+                        <option value="">Selecione...</option>
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                        <option value="Noturno">Noturno</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Cadastrar Aluno</button>
+            </form>
+        </section>
+
+        <section class="list-section">
+            <h2>Alunos Cadastrados</h2>
+            <% if (typeof alunos !== 'undefined' && alunos.length > 0) { %>
+                <ul class="lista-alunos">
+                    <% alunos.forEach(function(aluno) { %>
+                        <li>
+                            <p class="aluno-info">
+                                <strong>Nome:</strong> <span><%= aluno.nome %></span>
+                            </p>
+                            <p class="aluno-info">
+                                <strong>Email:</strong> <span><%= aluno.email %></span>
+                            </p>
+                            <p class="aluno-info">
+                                <strong>RGM:</strong> <span><%= aluno.rgm %></span>
+                            </p>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else if (typeof alunos !== 'undefined' && alunos.length === 0) { %>
+                <p class="estado">Nenhum aluno cadastrado ainda.</p>
+            <% } else { %>
+                <p class="estado">Carregando lista de alunos...</p>
+            <% } %>
+        </section>
+    </div>
+
+</body>
+</html>
